@@ -7,9 +7,6 @@ Script Task: This script recommends songs back to the user.
 import requests
 
 
-urlSearch = "https://shazam.p.rapidapi.com/search"
-urlRecommend = "https://shazam.p.rapidapi.com/songs/list-recommendations"
-
 print("Providing the best song recommendations since June 2021")
 print("\n")
 userSongName = input("Please provide a name of a song: ")
@@ -17,7 +14,7 @@ userSongName = input("Please provide a name of a song: ")
 
 def extractJson(songName: str):
 
-    url = "https://shazam.p.rapidapi.com/search"
+    urlSearch = "https://shazam.p.rapidapi.com/search"
     querystring = {
         "term": songName,
         "locale": "en-US",
@@ -30,7 +27,7 @@ def extractJson(songName: str):
         'x-rapidapi-host': "shazam.p.rapidapi.com"
         }
 
-    response = requests.get(url, headers=headers, params=querystring)
+    response = requests.get(urlSearch, headers=headers, params=querystring)
 
     return response.json()
 
@@ -72,7 +69,7 @@ def provideOptionSelection(songList: list, jsonData: dict):
 
 
 def getRecommendations(jsonData: dict, numberSelected: int):
-    urlRec = "https://shazam.p.rapidapi.com/songs/list-recommendations"
+    urlRecommend = "https://shazam.p.rapidapi.com/songs/list-recommendations"
     key = jsonData['tracks']['hits'][numberSelected-1]['track']['key']
     # put this data when ready inside the key
     # jsonData['tracks']['hits'][0]['track']['key']
@@ -86,10 +83,11 @@ def getRecommendations(jsonData: dict, numberSelected: int):
         'x-rapidapi-host': "shazam.p.rapidapi.com"
         }
 
-    response = requests.get(urlRec, headers=headers, params=querystring)
+    response = requests.get(urlRecommend, headers=headers, params=querystring)
 
     json20SongList = response.json()
 
+    # prevents error thrown if object/dictionary is empty
     if json20SongList:
         for n in range(20):
             print(str(n+1) + ":", json20SongList['tracks'][n]['title'])
