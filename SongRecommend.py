@@ -52,6 +52,8 @@ def provideOptionSelection(songList: list, jsonData: dict):
 
     print("")
     print("Song List")
+
+    # print 3 songs for user to choose from
     for n in range(len(songList)):
         print(str(n + 1) + ":", songList[n])
 
@@ -64,15 +66,13 @@ def provideOptionSelection(songList: list, jsonData: dict):
         if numberSelection > 3 or numberSelection < 1:
             print("Invalid number selection")
 
-    # return jsonData['tracks']['hits'][numberSelection]
     return numberSelection
 
 
 def getRecommendations(jsonData: dict, numberSelected: int):
     urlRecommend = "https://shazam.p.rapidapi.com/songs/list-recommendations"
     key = jsonData['tracks']['hits'][numberSelected-1]['track']['key']
-    # put this data when ready inside the key
-    # jsonData['tracks']['hits'][0]['track']['key']
+
     querystring = {
         "key": key,
         "locale": "en-US"
