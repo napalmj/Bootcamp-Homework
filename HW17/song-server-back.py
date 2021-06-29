@@ -31,6 +31,6 @@ def recommendations():
         queryStringKey = request.args.get('key')
         songList = shaz.getDictTopSongs(shaz, queryStringKey)
         if type(songList) == str:
-            songList = {'No Recommendations --> Song Not Popular Enough.': 'https://image.emojipng.com/158/14092158.jpg'}
+            songList = [['No Recommendations --> Song Not Popular Enough.', 'https://image.emojipng.com/158/14092158.jpg']]
         listSize = len(songList)
         return render_template('recommendations.html', recommendData=songList, listSize=listSize)

@@ -12,12 +12,12 @@
         </nav>
 
         <div class="songs-list-container">
-            <div class='song-container'>
-                {% for i in range(0, listSize) %}
-                <a><h2>{{recommendData[i][0]}}</h2></a>
-                <img src={{recommendData[i][1]}} alt="image song art">
-                {% endfor %}
-            </div>
+            {% for i in range(0, listSize) %}
+                <div class='song-container'>
+                    <a><h2>{{recommendData[i][0]}}</h2></a>
+                    <img src={{recommendData[i][1]}} alt="image song art">
+                </div>    
+            {% endfor %}
         </div>
     </body>
 </html>

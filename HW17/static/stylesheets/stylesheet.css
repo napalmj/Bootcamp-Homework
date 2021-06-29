@@ -30,6 +30,7 @@ input {
 .submit-btn:hover {
     transform: translateY(-2px);
     box-shadow: black;
+    cursor: pointer;
 }
 
 a {
@@ -80,13 +81,15 @@ img {
 }
 
 .songs-list-container {
-    display: flex;
+    display: grid;
     padding: 1em;
     justify-content: center;
+
 }
 
 .song-container {
     opacity: 90%;
+    display: inline-grid;;
 
 }
 

@@ -55,32 +55,22 @@ class shazamSearchRecommendTool:
         n = 0
         # print(songs)
         if songs:
-            while n < len(songs['tracks']):
-                for values, keys in songs['tracks'][n].items():
-                    if values == 'title':
-                        tempList.append(keys)
-                    elif values == 'images':
-                        tempList.append(keys['coverart'])
-                        songList.append(tempList)
-                        tempList = []
-                n = n + 1
-
+            try:
+                while n < len(songs['tracks']):
+                    for values, keys in songs['tracks'][n].items():
+                        if values == 'title':
+                            tempList.append(keys)
+                        elif values == 'images':
+                            tempList.append(keys['coverart'])
+                            songList.append(tempList)
+                            tempList = []
+                    n = n + 1
+            except TypeError:
+                return "ERROR ME!"
             # print(songList)
             return songList
         else:
             return "ERROR ME!"
-
-        # for songResult, count in songs['tracks']:
-        #     tempList.append(songResult['title'])
-        #     try:
-        #         tempList.append(songResult['images']['coverart'])
-        #     except KeyError:
-        #         songResult['images']['coverart'] = "https://images.mktw.net/im-333859?width=620&size=1.4382022471910112"
-        #         tempList.append(songResult['images']['coverart'])
-        #     if count == 20:
-        #         return songList
-        #     else:
-        #         songList.append(tempList)
 
     def getTrackKey(self, jsonData: dict):
         trackKeyList = []

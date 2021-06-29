@@ -11,17 +11,17 @@
             </ul>            
         </nav>
 
-        <div class="songs-list-container">{% block content %}
-            <div class="song-container">
-                {% set i = namespace(value=0) %}
-                {% for key, value in formData.items() %}
+        <div class="songs-list-container">
+            {% set i = namespace(value=0) %}
+            {% for key, value in formData.items() %}
+                <div class="song-container">
                     <h2>
                         <a href="../recommendations?songname={{key}}&key={{keyList[i.value]}}" name={{key}}>{{key}}</a>
                     </h2>
                     <img src={{value}} alt="image song art">
-                    {% set i.value = i.value + 1 %}
-                {% endfor %}                
-            </div>
-        {% endblock %}</div>
+                </div>
+            {% set i.value = i.value + 1 %}
+            {% endfor %}           
+        </div>
     </body>
 </html>
