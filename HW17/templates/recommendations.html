@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Shazam Song Tool</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/stylesheet.css') }}">
+    </head>
+    <body>
+        <nav class="nav-container">
+            <ul>
+                <a href="../"><li>Home</li></a>
+            </ul>            
+        </nav>
+
+        <div class="songs-list-container">
+            <div class='song-container'>
+                {% for i in range(0, listSize) %}
+                <a><h2>{{recommendData[i][0]}}</h2></a>
+                <img src={{recommendData[i][1]}} alt="image song art">
+                {% endfor %}
+            </div>
+        </div>
+    </body>
+</html>

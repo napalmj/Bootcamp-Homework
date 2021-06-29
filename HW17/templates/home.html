@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Shazam Song Tool</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/stylesheet.css') }}">
+    </head>
+    <body>
+        <div class=form-container-padding>
+            <div class="form-container">
+                <h1>Shazam Song Tool</h1>
+                <form action="/data" method = "POST" class="form-sheet">
+                    <p>Input a song name: <input type="text" name = "Name"/></p>
+                    <p><input type="submit" value="Submit" class="submit-btn"/></p>
+                </form>            
+            </div>            
+        </div>
+    </body>
+</html>
