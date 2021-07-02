@@ -75,7 +75,11 @@ SELECT * FROM store_animals sa ;
 
 SELECT * FROM store_animals;
 -- prints out the id of a given doctor name
-SELECT name, id FROM store_doctors WHERE name LIKE 'Gardenia Orellana';
+SELECT 
+    name, id 
+FROM 
+    store_doctors 
+WHERE name LIKE 'Gardenia Orellana';
 
 -- shows all dog and malady names for given doctor ID
 SELECT 
@@ -106,9 +110,12 @@ WHERE store_doctors.name LIKE 'Gardenia Orellana';
 -- Shows all possible combinations of dog names and maladies 
 -- ignore the actual malady stored with each dog
 -- tip: number of rows should be dogs times maladies
-SELECT store_animals.name, maladies.name
-FROM store_animals
-JOIN maladies
+SELECT 
+    store_animals.name, maladies.name
+FROM 
+    store_animals
+JOIN 
+    maladies
 ON TRUE;
 
 
