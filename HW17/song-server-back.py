@@ -1,5 +1,8 @@
 from flask import Flask, request, render_template
 from .shazamClassTool import shazamSearchRecommendTool as shaz
+# import spotipy
+# from spotipy.oauth2 import SpotifyClientCredentials
+
 
 app = Flask(__name__)
 
@@ -34,3 +37,10 @@ def recommendations():
             songList = [['No Recommendations --> Song Not Popular Enough.', 'https://image.emojipng.com/158/14092158.jpg']]
         listSize = len(songList)
         return render_template('recommendations.html', recommendData=songList, listSize=listSize)
+
+# @app.route("/spotify_suggestions", methods=['GET'])
+# def spotify_suggestions():
+#     sp = spotipy.Spotify(auth_manager=SpotifyClientCredentials(client_id="YOUR_APP_CLIENT_ID", client_secret="YOUR_APP_CLIENT_SECRET"))
+#     results = sp.search(q='weezer', limit=20)
+#     for idx, track in enumerate(results['tracks']['items']):
+#         print(idx, track['name'])
