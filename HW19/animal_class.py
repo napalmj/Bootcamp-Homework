@@ -35,25 +35,24 @@ class query_class:
         else:
             return self.existingTables[0]
 
-    # def editAddRemove(self, modifyListParams = []):
-    #     cursor = self.database.cursor()
-    #     editParam = modifyListParams[1].lower()
-    #     if modifyListParams[0] == 'add':
-    #         cursor.execute(
-    #             f"""ALTER TABLE {modifyListParams[2]}\
-    #                 ADD COLUMN {editParam}\
-    #             """
-    #         )
-    #     elif modifyListParams[0] == 'delete':
-    #         cursor.execute(
-    #             f"""ALTER TABLE {modifyListParams[2]}\
-    #                 DROP COLUMN {editParam}\
-    #             """
-    #         )
-    #     elif modifyListParams[0] == 'edit':
-    #         print('edit', modifyListParams[1])
-    #     else:
-    #         return 'Invald Edit Param'
+    def editAddRemove(self, modifyListParams = []):
+        cursor = self.database.cursor()
+        editParam = modifyListParams[1].lower()
+        if modifyListParams[0] == 'add':
+            print('add')
+            # cursor.execute(
+            #     f"""ALTER TABLE {modifyListParams[2]}\
+            #         ADD COLUMN {editParam}\
+            #     """
+            # )
+        elif modifyListParams[0] == 'delete':
+            delStr = f"""DELETE FROM nathaniel_palmer.{modifyListParams[2]} 
+            WHERE {modifyListParams[2]}.id = {modifyListParams[1]};"""
+            cursor.execute(delStr)
+        elif modifyListParams[0] == 'edit':
+            print('edit', modifyListParams[1])
+        else:
+            return 'Invald Edit Param'
             
     def searchTables(self, strName):
         cursor = self.database.cursor()

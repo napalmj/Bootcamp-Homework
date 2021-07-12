@@ -5,19 +5,19 @@
         <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/stylesheet.css') }}">
     </head>
     <body>
-        <!-- <form method = "GET">
-            <input type="text" name = "search"/>
-            <input type="submit"/>
-        </form> -->
         <h1></h1>
         <div class="content-container">
-            <!-- <form method="GET"></form> -->
             <li name="tables">
                 {% for item in tables %}
-                    <a href="?table={{item}}">{{item}} | </a>
-                {% endfor %}  
+                    <a href="?table={{item}}">{{item}} .</a>
+                {% endfor %}
+                <form class="search-tab" method = "GET">
+                    <label>Search...</label>
+                    <input type="text" name = "search"/>
+                    <input type="submit"/>
+                </form>
             </li>
-            <!-- </form> -->
+            <h2>{{currentTable}}</h2>
             <table class="table-container">
                 <tr class="table-row-header-container">
                     {% for i in range(0, rowLength) %}
@@ -29,12 +29,12 @@
                     {% for j in range(0, rowLength) %}
                         <td>{{rowCells[i][j]}}</td class="table-row-data"> 
                     {% endfor %}
-                    <td><a href="?modify=edit-{{rowCells[i][0]}}-{{currentTable}}" class="href-link-btn">Edit</a></td>
-                    <td><a href="?modify=delete-{{rowCells[i][0]}}-{{currentTable}}" class="href-link-btn">Delete</a></td>
+                    <td><a href="?table={{currentTable}}&modify=edit-{{rowCells[i][0]}}-{{currentTable}}" class="href-link-btn">Edit</a></td>
+                    <td><a href="?table={{currentTable}}&modify=delete-{{rowCells[i][0]}}-{{currentTable}}" class="href-link-btn">Delete</a></td>
                 </tr>
                 {% endfor %}
             </table>
-            <a href="?modify=add-{{currentTable}}" class="href-link-btn">Add Data to Tables</a>
+            <a href="?table={{currentTable}}&modify=add-{{currentTable}}" class="href-link-btn">Add Data to Tables</a>
         </div>
     </body>
 </html>

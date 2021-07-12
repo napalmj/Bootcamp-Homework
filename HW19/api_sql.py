@@ -14,9 +14,9 @@ def home():
         tableQueryString = request.args.get('table')
         currentTable = qry.getCurrentTable(tableQueryString)
         modifierQueryStringFlag = request.args.get('modify')
-        if modifierQueryStringFlag: 
+        if modifierQueryStringFlag:
             modList = modifierQueryStringFlag.split('-')
-            print('Modify set', modList, currentTable)
+            qry.editAddRemove(modList)
         
         dogTable = qry.getDataTableData(currentTable)
         colTitle = dogTable[0]
