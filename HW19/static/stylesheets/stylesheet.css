@@ -8,8 +8,75 @@ html {
 }
 
 body {
-    margin: 1rem;
+    margin: 2rem;
     background-color: seashell;
     width: auto;
     height: auto;
+    padding: 1rem;
+}
+
+li {
+    list-style: none;
+    padding-bottom: 2rem;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+a:hover {
+    color:rgb(153, 181, 194);
+}
+
+.content-container {
+    font-size: 3rem;
+    color: black;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    height: 90vh;
+    width: 90vw;
+}
+
+.table-container {
+    background-color: rgb(153, 181, 194);
+    border: solid black 2px;
+    padding: 3px;
+    margin: 10px;
+    height: 90vh;
+    width: 90vw;
+}
+
+.table-row-header-container {
+    border: solid black 1px;
+
+}
+
+.table-row-header {
+    border: solid black 1px;
+
+}
+
+.table-row-data-container {
+    border: solid black 1px;
+
+}
+
+.table-row-data {
+    border: solid black 1px;
+}
+
+.href-link-btn {
+    border-style: solid;
+    background-color: rgb(197, 190, 190);
+    border-radius: 10px;
+    margin: 10px;
+    padding: 1px;
+}
+
+.href-link-btn:hover {
+    color: darkblue;
+    box-shadow: black;
+    background-color: coral;
 }
