@@ -12,8 +12,7 @@
                     <a href="?table={{item}}">{{item}} .</a>
                 {% endfor %}
                 <form class="search-tab" method = "GET">
-                    <label>Search...</label>
-                    <input type="text" name = "search"/>
+                    <input type="text" name = "search" placeholder="Search"/>
                     <input type="submit"/>
                 </form>
             </li>
@@ -29,12 +28,20 @@
                     {% for j in range(0, rowLength) %}
                         <td>{{rowCells[i][j]}}</td class="table-row-data"> 
                     {% endfor %}
-                    <td><a href="?table={{currentTable}}&modify=edit-{{rowCells[i][0]}}-{{currentTable}}" class="href-link-btn">Edit</a></td>
+                    <td><a href="edit?table={{currentTable}}&modify=edit-{{rowCells[i][0]}}-{{currentTable}}" class="href-link-btn">Edit</a></td>
                     <td><a href="?table={{currentTable}}&modify=delete-{{rowCells[i][0]}}-{{currentTable}}" class="href-link-btn">Delete</a></td>
                 </tr>
                 {% endfor %}
             </table>
-            <a href="?table={{currentTable}}&modify=add-{{currentTable}}" class="href-link-btn">Add Data to Tables</a>
+            <form method="GET" class="add-data">
+                <label>Add Content Here</label>
+                {% for j in range(0, rowLength) %}
+                <input type="text" placeholder="{{colTitle[j]}}" name="add"/>
+                {% endfor %}
+                <input type="submit"/>
+                <!-- <a onclick="document.forms['add-data'].submit(); return false;" href="?table={{currentTable}}&modify=add-{{currentTable}}" class="href-link-btn">Add Data to Tables</a> -->
+            </form>
+            <!-- <a href="?table={{currentTable}}&modify=add-{{currentTable}}" class="href-link-btn">Add Data to Tables</a> -->
         </div>
     </body>
 </html>

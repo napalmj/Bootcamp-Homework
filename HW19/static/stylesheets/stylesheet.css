@@ -12,7 +12,7 @@ body {
     background-color: seashell;
     width: auto;
     height: auto;
-    padding: 1rem;
+    padding: 2rem;
 }
 
 li {
@@ -84,4 +84,8 @@ a:hover {
     color: darkblue;
     box-shadow: black;
     background-color: coral;
+}
+
+.add-data {
+    margin: 3rem;
 }

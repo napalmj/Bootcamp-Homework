@@ -9,12 +9,19 @@ class query_class:
         self.existingTables = existingTables
         self.declareNewTables = declareNewTables
         self.schema = 'nathaniel_palmer'
+        self.currentTable = ''
+        self.currentColHeader = ''
         self.database = pymysql.connect(
             host="freetrainer.cryiqqx3x1ub.us-west-2.rds.amazonaws.com",
             user="nathaniel",
             password="changeme"            
         )
         
+    def setCurrentTable(self, table):
+        self.currentTable = table
+
+    def setCurrentColHeader(self, col):
+        self.currentColHeader = col
     def getTables(self):
         return self.existingTables    
 
@@ -35,30 +42,26 @@ class query_class:
         else:
             return self.existingTables[0]
 
+    #params specified as edit param, id type(if necessary), table, additional data
     def editAddRemove(self, modifyListParams = []):
         cursor = self.database.cursor()
-        editParam = modifyListParams[1].lower()
-        if modifyListParams[0] == 'add':
-            print('add')
-            # cursor.execute(
-            #     f"""ALTER TABLE {modifyListParams[2]}\
-            #         ADD COLUMN {editParam}\
-            #     """
-            # )
-        elif modifyListParams[0] == 'delete':
+        editParam = modifyListParams[0].lower()
+        if editParam == 'add':
+            addStr = f"""INSERT INTO nathaniel_palmer.{modifyListParams[2]} 
+            (name)
+            VALUES 
+            ('{modifyListParams[3][1]}');"""
+            cursor.execute(addStr)
+        elif editParam == 'delete':
             delStr = f"""DELETE FROM nathaniel_palmer.{modifyListParams[2]} 
             WHERE {modifyListParams[2]}.id = {modifyListParams[1]};"""
             cursor.execute(delStr)
-        elif modifyListParams[0] == 'edit':
+        elif editParam == 'edit':
             print('edit', modifyListParams[1])
         else:
             return 'Invald Edit Param'
             
     def searchTables(self, strName):
         cursor = self.database.cursor()
-        cursor.execute(
-            f"""SELECT dogs.name\
-                FROM dogs\
-                WHERE doctors.name Like '%{strName}%'\
-            """
-        )
+        searchStr = f"""SELECT * FROM nathaniel_palmer.dogs WHERE dogs.name LIKE '%{strName}%'"""
+        cursor.execute(searchStr)
