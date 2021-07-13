@@ -57,13 +57,16 @@ class query_class:
             VALUES 
             ('{modifyListParams[3][1]}');"""
             cursor.execute(addStr)
+            self.database.commit()
         elif editParam == 'delete':
             delStr = f"""DELETE FROM nathaniel_palmer.{modifyListParams[2]} 
             WHERE {modifyListParams[2]}.id = {modifyListParams[1]};"""
             cursor.execute(delStr)
+            self.database.commit()
         elif editParam == 'edit':
             updateData = f"UPDATE nathaniel_palmer.{modifyListParams[2]} SET {modifyListParams[3]} = '{self.currentModifyString}' WHERE {modifyListParams[2]}.id = {modifyListParams[4]};"
             cursor.execute(updateData)
+            self.database.commit()
         else:
             return 'Invald Edit Param'
             
