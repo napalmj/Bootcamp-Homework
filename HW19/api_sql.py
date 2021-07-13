@@ -7,15 +7,21 @@ qry = query_class(dogTables)
 app = Flask(__name__)
 
 
+
 @app.route("/", methods=['GET'])
 def home():
-    
     if request.method == 'GET':
-        addQueryFields = request.args.getlist('add')
+        addQueryParams = request.args.getlist('add')
         print(qry.currentColHeader)
-        if addQueryFields:
-            qry.editAddRemove(['add', 1, qry.currentTable, addQueryFields, qry.currentColHeader])
-        
+        if addQueryParams:
+            qry.editAddRemove(['add', 1, qry.currentTable, addQueryParams, qry.currentColHeader])
+
+        editQueryParams = request.args.get('modify')
+        if editQueryParams:
+            modList = editQueryParams.split('-')
+            print(modList)
+            qry.editAddRemove(modList)
+
         tableQueryString = request.args.get('table')
         currentTable = qry.getCurrentTable(tableQueryString)
         qry.setCurrentTable(currentTable)
@@ -27,11 +33,17 @@ def home():
         dogTable = qry.getDataTableData(currentTable)
         colTitle = dogTable[0]
         qry.setCurrentColHeader(colTitle)
-        # print(qry.currentColHeader)
+        qry.setCurrentModifyString(request.args.get('editSubmit'))
+
         rowCells = dogTable[1]
         rowLength = len(colTitle)
         rowHeight = len(rowCells)
         
+        if request.args.get('search'):
+            qry.searchTables(request.args.get('search'))
+        else:
+            qry.searchedData.clear()
+
 
     return render_template(
         'home.html',
@@ -40,14 +52,22 @@ def home():
         rowLength=rowLength,
         rowHeight=rowHeight,
         tables=qry.getTables(),
-        currentTable=currentTable
+        currentTable=currentTable,
+        searchedData=qry.searchedData
         )
 
-@app.route("/edit", methods=['GET'])
+@app.route("/edit/", methods=['GET'])
 def edit():
     if request.method == 'GET':
-        print('HI')
-    return f"Hi"
+        table = request.args.get('table')
+        modParam = request.args.get('modify')
+
+        colTitle = qry.getDataTableData(table)[0]
+        rowLength = len(colTitle)
+
+
+        print(table, modParam)
+    return render_template('edit.html', colTitle=colTitle, rowLength=rowLength)
 
 # @app.route("/add", methods=['POST'])
 # def add():

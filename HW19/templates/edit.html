@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Dog Hospital</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/stylesheet.css') }}">
+    </head>
+    <body>
+        <form class="search-tab" method = "GET">
+            {% for j in range(0, rowLength) %}
+            <input type="text" placeholder="{{colTitle[j]}}" name="add"/>
+            {% endfor %}
+            <input type="submit"/>
+        </form>
+    </body>
+</html>

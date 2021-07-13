@@ -11,6 +11,8 @@ class query_class:
         self.schema = 'nathaniel_palmer'
         self.currentTable = ''
         self.currentColHeader = ''
+        self.currentModifyString = ''
+        self.searchedData = []
         self.database = pymysql.connect(
             host="freetrainer.cryiqqx3x1ub.us-west-2.rds.amazonaws.com",
             user="nathaniel",
@@ -22,6 +24,10 @@ class query_class:
 
     def setCurrentColHeader(self, col):
         self.currentColHeader = col
+
+    def setCurrentModifyString(self, param):
+        self.currentModifyString = param
+
     def getTables(self):
         return self.existingTables    
 
@@ -43,7 +49,7 @@ class query_class:
             return self.existingTables[0]
 
     #params specified as edit param, id type(if necessary), table, additional data
-    def editAddRemove(self, modifyListParams = []):
+    def editAddRemove(self, modifyListParams = [], optionString = ''):
         cursor = self.database.cursor()
         editParam = modifyListParams[0].lower()
         if editParam == 'add':
@@ -57,11 +63,16 @@ class query_class:
             WHERE {modifyListParams[2]}.id = {modifyListParams[1]};"""
             cursor.execute(delStr)
         elif editParam == 'edit':
-            print('edit', modifyListParams[1])
+            updateData = f"UPDATE nathaniel_palmer.{modifyListParams[2]} SET {modifyListParams[3]} = '{self.currentModifyString}' WHERE {modifyListParams[2]}.id = {modifyListParams[4]};"
+            cursor.execute(updateData)
         else:
             return 'Invald Edit Param'
             
-    def searchTables(self, strName):
+    def searchTables(self, strName = ''):
+        totalSearcData = []
         cursor = self.database.cursor()
-        searchStr = f"""SELECT * FROM nathaniel_palmer.dogs WHERE dogs.name LIKE '%{strName}%'"""
-        cursor.execute(searchStr)
+        for item in self.existingTables:
+            searchStr = f"SELECT * FROM nathaniel_palmer.{item} WHERE {item}.name LIKE '%{strName}%'"
+            cursor.execute(searchStr)
+            totalSearcData.append(cursor.fetchall())
+        self.searchedData = totalSearcData

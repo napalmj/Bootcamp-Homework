@@ -3,9 +3,9 @@
     <head>
         <title>Dog Hospital</title>
         <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/stylesheet.css') }}">
+        <script src="{{url_for('static', filename='formDisplay.js')}}"></script>
     </head>
     <body>
-        <h1></h1>
         <div class="content-container">
             <li name="tables">
                 {% for item in tables %}
@@ -16,7 +16,15 @@
                     <input type="submit"/>
                 </form>
             </li>
+            <p>{{searchedData}}</p>
             <h2>{{currentTable}}</h2>
+
+            <form id="myToggle" method="GET">
+                <label>Edit</label>
+                    <input type="text" placeholder="input pre-edit here" name="editSubmit"/>
+                <input type="submit"/>
+            </form>
+
             <table class="table-container">
                 <tr class="table-row-header-container">
                     {% for i in range(0, rowLength) %}
@@ -26,9 +34,9 @@
                 {% for i in range(0, rowHeight) %}
                 <tr class="table-row-data-container">
                     {% for j in range(0, rowLength) %}
-                        <td>{{rowCells[i][j]}}</td class="table-row-data"> 
+                        <td><a href="?table={{currentTable}}&modify=edit-{{rowCells[i][j]}}-{{currentTable}}-{{colTitle[j]}}-{{rowCells[i][0]}}">{{rowCells[i][j]}}</a></td class="table-row-data"> 
                     {% endfor %}
-                    <td><a href="edit?table={{currentTable}}&modify=edit-{{rowCells[i][0]}}-{{currentTable}}" class="href-link-btn">Edit</a></td>
+                    <!-- <td><a href="?table={{currentTable}}&modify=edit-{{rowCells[i][0]}}-{{currentTable}}"  class="href-link-btn">Edit</a></td> -->
                     <td><a href="?table={{currentTable}}&modify=delete-{{rowCells[i][0]}}-{{currentTable}}" class="href-link-btn">Delete</a></td>
                 </tr>
                 {% endfor %}
