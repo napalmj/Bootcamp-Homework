@@ -48,7 +48,6 @@ class query_class:
         else:
             return self.existingTables[0]
 
-    #params specified as edit param, id type(if necessary), table, additional data
     def editAddRemove(self, modifyListParams = [], optionString = ''):
         cursor = self.database.cursor()
         editParam = modifyListParams[0].lower()

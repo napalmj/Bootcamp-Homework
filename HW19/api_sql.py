@@ -44,7 +44,6 @@ def home():
         else:
             qry.searchedData.clear()
 
-
     return render_template(
         'home.html',
         colTitle=colTitle,
@@ -55,31 +54,3 @@ def home():
         currentTable=currentTable,
         searchedData=qry.searchedData
         )
-
-@app.route("/edit/", methods=['GET'])
-def edit():
-    if request.method == 'GET':
-        table = request.args.get('table')
-        modParam = request.args.get('modify')
-
-        colTitle = qry.getDataTableData(table)[0]
-        rowLength = len(colTitle)
-
-
-        print(table, modParam)
-    return render_template('edit.html', colTitle=colTitle, rowLength=rowLength)
-
-# @app.route("/add", methods=['POST'])
-# def add():
-#     if request.method == 'POST':
-#         formData = request.form
-#         print(formData)
-#         formName = list((formData.to_dict()).values())[0]
-
-#     return app.redirect(app.url_for('home'))
-
-# @app.route("/delete", methods=['GET'])
-# def delete():
-#     return render_template('delete.html')
-
-

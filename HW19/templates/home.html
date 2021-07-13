@@ -16,9 +16,21 @@
                     <input type="submit"/>
                 </form>
             </li>
-            <p>{{searchedData}}</p>
-            <h2>{{currentTable}}</h2>
+            <div>
+                <ul>
+                {% set i = namespace(value=0) %}
+                {% for item in searchedData %}
+                    <li>
+                        <a href="?table={{tables[i.value]}}">{{tables[i.value]}}</a> - {{item}}   
+                    </li>
+                {% set i.value = i.value + 1 %}
+                {% endfor %}
+                </ul>                
+            </div>
 
+
+            <br>
+            <h2>{{currentTable}}</h2>
             <form id="myToggle" method="GET">
                 <label>Edit</label>
                     <input type="text" placeholder="input pre-edit here" name="editSubmit"/>
@@ -47,9 +59,7 @@
                 <input type="text" placeholder="{{colTitle[j]}}" name="add"/>
                 {% endfor %}
                 <input type="submit"/>
-                <!-- <a onclick="document.forms['add-data'].submit(); return false;" href="?table={{currentTable}}&modify=add-{{currentTable}}" class="href-link-btn">Add Data to Tables</a> -->
             </form>
-            <!-- <a href="?table={{currentTable}}&modify=add-{{currentTable}}" class="href-link-btn">Add Data to Tables</a> -->
         </div>
     </body>
 </html>
